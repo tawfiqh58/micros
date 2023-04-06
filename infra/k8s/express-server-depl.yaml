@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: express-server__deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: express-server__app
+  template:
+    metadata:
+      labels:
+        # manage pods who has this lebel
+        # name must be the same as in the selector
+        app: express-server__app
+    spec:
+      containers:
+        - name: express-server__container
+          image: express-server__image
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: express-server__service
+spec:
+  selector:
+    app: express-server__app
+  ports:
+    - name: express-server__port
+      # http port has been created on top of tcp
+      protocol: TCP
+      # port; user will access
+      port: 5000
+      # each replica will have its own IP address k8s will track that
+      # targetPort is the port inside the container app running on that port
+      targetPort: 5000

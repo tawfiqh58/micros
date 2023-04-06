@@ -12,3 +12,9 @@ $ docker build -t express-server .
 
 $ docker images
 to see all docker images available to the machine
+
+## Kubernetes
+
+We have added kubernetes deployment yaml config file
+This file will be responsible to create `pods` inside our
+kubernetes cluster
