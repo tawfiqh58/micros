@@ -38,15 +38,20 @@ You need a kubernetes cluster to rotate new docker image
 
     1. Create a cluster in digital-ocean
     2. Copy access token
+       How to:
+       In the Digital Ocean dashboard go to API of the sidebar,
+       then create a new Applications & API access token
     3. Past it to github secrets
+       How to:
+       Under your repository name, click "Settings",
+       then in the "Security" section of the sidebar,
+       select "Secrets and variables" and add secret.
 
 ## Config Github Actions
 
 You need to config github actions to automate this process
-
-    1. Just create a action-name.yaml file inside .github/workflows
-
-it will automatically create a github actions for you.
+to do so just create a `action-name.yaml` file inside `.github/workflows`
+it will automatically create a Github Actions for you.
 
 NOTE: Remember now github will only trigger the action if you change
 something to the directory you have mentioned inside the action file

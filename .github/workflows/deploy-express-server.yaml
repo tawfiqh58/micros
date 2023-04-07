@@ -26,7 +26,8 @@ jobs:
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
       # To access cluster & run commands; save cluster credential in this machine
-      - run: doctl kubernetes cluster kubeconfig save micros
+      # 99d...44c this id you will find it while creating cluster
+      - run: doctl kubernetes cluster kubeconfig save 99dcd9ea-317c-4b87-96a5-89679acdb44c
 
       # Rollout to re-create pods with new docker image
       # ? Q: how it will track changes to my infra/k8s/express-server__deployment.yaml
