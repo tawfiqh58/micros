@@ -1,0 +1,24 @@
+name: deploy-main
+
+on:
+  push:
+    branches: 
+      - main
+    paths:
+      - 'infra/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - run: doctl kubernetes cluster kubeconfig save 99dcd9ea-317c-4b87-96a5-89679acdb44c
+      # We re-apply deployment config only when infra/** dir has been changed
+
+      # infra/k8s dir is existing in the machine but it's not required to
+      # to upload/copy-past these file to kubernetes cluster we can apply it
+      # from local machine as well.
+      - run: kubectl apply -f infra/k8s
