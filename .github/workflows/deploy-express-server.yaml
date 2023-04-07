@@ -32,4 +32,4 @@ jobs:
       # Rollout to re-create pods with new docker image
       # ? Q: how it will track changes to my infra/k8s/express-server__deployment.yaml
       # and from which dir/ this command will be executed?
-      - run: kubectl rollout restart deployment express-server__deployment
+      - run: kubectl rollout restart deployment express-server--deployment
