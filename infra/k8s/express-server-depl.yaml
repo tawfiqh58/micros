@@ -1,32 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: express-server__deployment
+  # name can only lower case alphanumeric character and '-'
+  name: express-server--deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: express-server__app
+      app: express-server--app
   template:
     metadata:
       labels:
-        # name must be the same as in the selector
         # manage pods who has this lebel
-        app: express-server__app
+        # name must be the same as in the selector
+        app: express-server--app
     spec:
       containers:
-        - name: express-server__container
-          image: express-server__image
+        - name: express-server--container
+          image: express-server--image
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: express-server__service
+  name: express-server--service
 spec:
   selector:
-    app: express-server__app
+    app: express-server--app
   ports:
-    - name: express-server__port
+    - name: express-server--port
       # http port has been created on top of tcp
       protocol: TCP
       # port; user will access
