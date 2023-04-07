@@ -6,6 +6,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
+  console.log('Check github workflows...');
   res.send('Hello from server!');
 });
 
