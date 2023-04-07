@@ -13,13 +13,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       # Build a fresh docker image
-      - run: cd server && docker build -t thedeveloperx/express-server .
+      - run: cd server && docker build -t tawfiq58/express-server .
       - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       # Upload fresh docker image
-      - run: docker push thedeveloperx/express-server
+      - run: docker push tawfiq58/express-server
 
       # Access kubernetes cluster
       - uses: digitalocean/action-doctl@v2
