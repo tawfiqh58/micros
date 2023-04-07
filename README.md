@@ -44,5 +44,22 @@ You need a kubernetes cluster to rotate new docker image
 
 You need to config github actions to automate this process
 
-    1. Create a deplopy.yaml file inside .github/workflows
-    2. _
+    1. Just create a action-name.yaml file inside .github/workflows
+
+it will automatically create a github actions for you.
+
+NOTE: Remember now github will only trigger the action if you change
+something to the directory you have mentioned inside the action file
+and push it or whatever action you have set the action to run.
+
+```yaml
+on:
+  push:
+    branches: 
+      - main
+    paths:
+      - 'server/**'
+```
+
+For the above example github will trigger action for `git push` which contains
+changes in the `server/**` directory.
