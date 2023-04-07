@@ -1,0 +1,34 @@
+name: deploy-express-server
+
+on:
+  push:
+    branches: 
+      - main
+    paths:
+      - 'server/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # Build a fresh docker image
+      - run: cd server && docker build -t thedeveloperx/express-server .
+      - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      # Upload fresh docker image
+      - run: docker push thedeveloperx/express-server
+
+      # Access kubernetes cluster
+      - uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      # To access cluster & run commands; save cluster credential in this machine
+      - run: doctl kubernetes cluster kubeconfig save micros
+
+      # Rollout to re-create pods with new docker image
+      # ? Q: how it will track changes to my infra/k8s/express-server__deployment.yaml
+      # and from which dir/ this command will be executed?
+      - run: kubectl rollout restart deployment express-server__deployment
