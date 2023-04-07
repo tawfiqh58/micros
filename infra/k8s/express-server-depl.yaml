@@ -10,8 +10,8 @@ spec:
   template:
     metadata:
       labels:
-        # manage pods who has this lebel
         # name must be the same as in the selector
+        # manage pods who has this lebel
         app: express-server__app
     spec:
       containers:
